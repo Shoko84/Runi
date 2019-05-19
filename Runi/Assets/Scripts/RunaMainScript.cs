@@ -61,8 +61,7 @@ namespace Runa
         private                              GameObject          _playerInstance;
         private                              CharacterController _playerCharacterController;
 
-        [Header("Gun properties")] public Transform bulletShootingTransform;
-        public                            LayerMask allowedShootingLayers;
+        [Header("Gun properties")] public LayerMask allowedShootingLayers;
         private                           bool      _isClickPressedDown;
 
         [Header("Game properties")] public GameStatus gameStatus;
@@ -78,7 +77,6 @@ namespace Runa
             {
                 _playerCharacterController = _playerInstance.GetComponent<CharacterController>();
                 CameraTransform = _playerInstance.GetComponentInChildren<Camera>().transform;
-                bulletShootingTransform = _playerInstance.transform.Find("Weapon/BulletPos");
             }
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
