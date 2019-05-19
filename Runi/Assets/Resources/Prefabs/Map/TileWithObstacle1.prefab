@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3421094619145770158}
   - component: {fileID: 8625643496700703411}
   - component: {fileID: 4206221342116178311}
-  - component: {fileID: 4280760995762059717}
+  - component: {fileID: 6438830969990854799}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4507128671468063296}
-  m_LocalRotation: {x: -0.088521324, y: -0.90767336, z: -0.2432103, w: 0.33036613}
-  m_LocalPosition: {x: 0, y: -0.125, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_Children: []
   m_Father: {fileID: 5743718146237667907}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -30, y: -140, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8625643496700703411
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -78,7 +78,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4280760995762059717
+--- !u!65 &6438830969990854799
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
