@@ -181,6 +181,10 @@ MonoBehaviour:
     type: 3}
   playerGravity: 3
   playerSpeed: 2.2
+  bulletShootingTransform: {fileID: 0}
+  allowedShootingLayers:
+    serializedVersion: 2
+    m_Bits: 512
   gameStatus: 0
   tilePerRow: 5
   tileMaxDepth: 10

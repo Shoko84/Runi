@@ -27,15 +27,12 @@ namespace Runa
         private                           uint             _rowGeneratedCount;
         private                           bool             _shouldGenerateRow;
 
-        [Header("Camera properties")]
-        [SerializeField]
+        [Header("Camera properties")] [SerializeField]
         private Transform _cameraTransform;
 
-        public Transform CameraTransform
-        {
+        public Transform CameraTransform {
             get { return _cameraTransform; }
-            set
-            {
+            set {
                 _cameraTransform = value;
                 if (_cameraTransform)
                     _originalRotation = _cameraTransform.localRotation;
@@ -64,6 +61,10 @@ namespace Runa
         private                              GameObject          _playerInstance;
         private                              CharacterController _playerCharacterController;
 
+        [Header("Gun properties")] public Transform bulletShootingTransform;
+        public                            LayerMask allowedShootingLayers;
+        private                           bool      _isClickPressedDown;
+
         [Header("Game properties")] public GameStatus gameStatus;
         public                             byte       tilePerRow   = 5;
         public                             byte       tileMaxDepth = 5;
@@ -77,6 +78,7 @@ namespace Runa
             {
                 _playerCharacterController = _playerInstance.GetComponent<CharacterController>();
                 CameraTransform = _playerInstance.GetComponentInChildren<Camera>().transform;
+                bulletShootingTransform = _playerInstance.transform.Find("Weapon/BulletPos");
             }
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -94,6 +96,9 @@ namespace Runa
 
             //Updating player
             UpdatePlayerMovement();
+
+            //Shooting inputs
+            HandleShooting();
         }
 
         private void InitializeBase()
@@ -226,6 +231,30 @@ namespace Runa
                 _playerCharacterController.Move(new Vector3(0, 0, -mapScrollSpeed * Time.deltaTime));
             }
             _playerCharacterController.Move(new Vector3(0, -playerGravity * Time.deltaTime, 0));
+        }
+
+        private void HandleShooting()
+        {
+            var fireInput = Input.GetAxis("Fire1");
+            if (fireInput > 0 && !_isClickPressedDown)
+            {
+                var raycastHit = RaycastOnCursor(100, allowedShootingLayers);
+                if (raycastHit.collider)
+                {
+                    //TODO: Do bonus things?
+                    Destroy(raycastHit.collider.gameObject);
+                }
+                _isClickPressedDown = true;
+            }
+            else
+                _isClickPressedDown = false;
+        }
+
+        public RaycastHit RaycastOnCursor(float maxDistance, LayerMask allowedLayers)
+        {
+            Ray cameraAim = CameraTransform.GetComponent<Camera>().ScreenPointToRay(new Vector3((float)Screen.width / 2, (float)Screen.height / 2));
+            Physics.Raycast(cameraAim, out var cameraHit, maxDistance, allowedLayers);
+            return cameraHit;
         }
     }
 }
